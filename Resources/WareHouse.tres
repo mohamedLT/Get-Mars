@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Object.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Structure/scifiStructure_04.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/tile_entity.tscn" type="PackedScene" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://Scripts/BaseBuilding.gd\"
+
+
+func _init() -> void:
+	ox_con=50
+	energy_con=10
+	texture = preload(\"res://Sprites/Structure/scifiStructure_04.png\")
+"
+
+[sub_resource type="PackedScene" id=2]
+_bundled = {
+"base_scene": 0,
+"conn_count": 0,
+"conns": PoolIntArray(  ),
+"editable_instances": [  ],
+"names": PoolStringArray( "WareHouse", "script" ),
+"node_count": 1,
+"node_paths": [  ],
+"nodes": PoolIntArray( -1, -1, 2147483647, 0, -1, 1, 1, 1, 0 ),
+"variants": [ ExtResource( 3 ), SubResource( 1 ) ],
+"version": 2
+}
+
+[resource]
+script = ExtResource( 1 )
+texture = ExtResource( 2 )
+name = "WareHouse"
+scene = SubResource( 2 )
+energy_stones = 100
+wood = 200

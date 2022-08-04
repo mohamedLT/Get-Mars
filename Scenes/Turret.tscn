@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/tile_entity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Turrets.gd" type="Script" id=3]
+
+[node name="Turret" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="1"]
+rotation = -1.5708

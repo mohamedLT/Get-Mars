@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/BackGround.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Tile/scifiTile_42.png" type="Texture" id=2]
+[ext_resource path="res://3270-Medium Nerd Font Complete Mono.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=4]
+
+[sub_resource type="QuadMesh" id=1]
+size = Vector2( 64, 64 )
+
+[sub_resource type="MultiMesh" id=2]
+mesh = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.537255 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+extra_spacing_char = 5
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 100
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="BackGround" type="MultiMeshInstance2D" parent="."]
+multimesh = SubResource( 2 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Layer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Layer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="Menu" type="Panel" parent="Layer/Control"]
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = -10.0
+margin_right = 400.0
+margin_bottom = 90.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Start" type="Button" parent="Layer/Control/Menu"]
+margin_top = 420.0
+margin_right = 300.0
+margin_bottom = 460.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "START"
+flat = true
+
+[node name="Quit" type="Button" parent="Layer/Control/Menu"]
+margin_top = 500.0
+margin_right = 300.0
+margin_bottom = 540.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "QUIT"
+flat = true
+
+[node name="Label" type="Label" parent="Layer/Control/Menu"]
+margin_left = -43.0
+margin_top = 155.0
+margin_right = 335.0
+margin_bottom = 358.0
+rect_rotation = -30.0
+custom_fonts/font = SubResource( 6 )
+text = " A Rts 
+ game"
+uppercase = true
+
+[node name="Placed" type="Node2D" parent="."]
+
+[connection signal="pressed" from="Layer/Control/Menu/Start" to="Layer/Control" method="_on_Start_pressed"]
+[connection signal="pressed" from="Layer/Control/Menu/Quit" to="Layer/Control" method="_on_Quit_pressed"]

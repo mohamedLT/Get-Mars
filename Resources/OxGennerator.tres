@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/Object.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Structure/scifiStructure_15.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/OxGenerator.tscn" type="PackedScene" id=3]
+
+[resource]
+script = ExtResource( 1 )
+texture = ExtResource( 2 )
+name = "OxGenerator"
+scene = ExtResource( 3 )
+energy_stones = 60
+wood = 100

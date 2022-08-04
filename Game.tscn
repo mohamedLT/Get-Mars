@@ -1,0 +1,442 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Tile/scifiTile_42.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/BackGround.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/EnergyGenerator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/MainBase.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/BuildingButton.gd" type="Script" id=6]
+[ext_resource path="res://Resources/EnergyGenerator.tres" type="Resource" id=7]
+[ext_resource path="res://Scenes/tile_entity.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Resources/Miner.tres" type="Resource" id=9]
+[ext_resource path="res://Resources/Turret.tres" type="Resource" id=10]
+[ext_resource path="res://Sprites/Unit/scifiUnit_09.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Garage.tres" type="Resource" id=12]
+[ext_resource path="res://Sprites/Unit/scifiUnit_10.png" type="Texture" id=13]
+[ext_resource path="res://Resources/EnergyCrystal.tres" type="Resource" id=14]
+[ext_resource path="res://Resources/OxProducer.tres" type="Resource" id=15]
+[ext_resource path="res://Resources/OxGennerator.tres" type="Resource" id=16]
+[ext_resource path="res://Resources/SawMill.tres" type="Resource" id=17]
+[ext_resource path="res://Scripts/worker_btn.gd" type="Script" id=18]
+[ext_resource path="res://Sprites/Unit/scifiUnit_47.png" type="Texture" id=19]
+[ext_resource path="res://Scripts/ChoiseBtn.gd" type="Script" id=20]
+[ext_resource path="res://Sprites/Unit/scifiUnit_23.png" type="Texture" id=21]
+[ext_resource path="res://Resources/Barracks.tres" type="Resource" id=22]
+[ext_resource path="res://3270-Medium Nerd Font Complete Mono.ttf" type="DynamicFontData" id=23]
+[ext_resource path="res://Sprites/light.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/Ox.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/wood.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/stone.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/light_off.png" type="Texture" id=28]
+
+[sub_resource type="QuadMesh" id=7]
+size = Vector2( 64, 64 )
+
+[sub_resource type="MultiMesh" id=2]
+mesh = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 48
+use_filter = true
+font_data = ExtResource( 23 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.133333, 0.117647, 0.117647, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+outline_size = 1
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 23 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 23 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 0.690196 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Main" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+smoothing_speed = 10.0
+script = ExtResource( 1 )
+
+[node name="BackGround" type="MultiMeshInstance2D" parent="."]
+multimesh = SubResource( 2 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Generated" type="Node2D" parent="."]
+
+[node name="Placed" type="Node2D" parent="."]
+
+[node name="EnergyGenerator" parent="Placed" instance=ExtResource( 4 )]
+position = Vector2( -310, -211 )
+
+[node name="MainBase" parent="Placed" instance=ExtResource( 8 )]
+position = Vector2( 107, 25 )
+script = ExtResource( 5 )
+
+[node name="Layer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Layer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="NetworkMode" type="TextureButton" parent="Layer/Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = 75.0
+toggle_mode = true
+shortcut_in_tooltip = false
+texture_normal = ExtResource( 28 )
+texture_pressed = ExtResource( 24 )
+expand = true
+
+[node name="BuildingPanel" type="Control" parent="Layer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_right = 50.0
+mouse_filter = 2
+
+[node name="BuildingButton" type="TextureRect" parent="Layer/Control/BuildingPanel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = -106.0
+margin_right = -10.0
+margin_bottom = -66.0
+mouse_filter = 0
+script = ExtResource( 6 )
+object = ExtResource( 7 )
+
+[node name="BuildingButton2" type="TextureRect" parent="Layer/Control/BuildingPanel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = -64.0
+margin_right = -10.0
+margin_bottom = -24.0
+mouse_filter = 0
+script = ExtResource( 6 )
+object = ExtResource( 16 )
+
+[node name="BuildingButton3" type="TextureRect" parent="Layer/Control/BuildingPanel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = -20.0
+margin_right = -10.0
+margin_bottom = 20.0
+mouse_filter = 0
+script = ExtResource( 6 )
+object = ExtResource( 17 )
+
+[node name="BuildingButton4" type="TextureRect" parent="Layer/Control/BuildingPanel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = 24.0
+margin_right = -10.0
+margin_bottom = 64.0
+mouse_filter = 0
+script = ExtResource( 6 )
+object = ExtResource( 9 )
+
+[node name="BuildingButton5" type="TextureRect" parent="Layer/Control/BuildingPanel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = 70.0
+margin_right = -10.0
+margin_bottom = 110.0
+mouse_filter = 0
+script = ExtResource( 6 )
+object = ExtResource( 22 )
+
+[node name="BuildingButton6" type="TextureRect" parent="Layer/Control/BuildingPanel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 22.0
+margin_top = -106.0
+margin_right = 62.0
+margin_bottom = -66.0
+mouse_filter = 0
+script = ExtResource( 6 )
+object = ExtResource( 12 )
+
+[node name="BuildingButton7" type="TextureRect" parent="Layer/Control/BuildingPanel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 22.0
+margin_top = -64.0
+margin_right = 62.0
+margin_bottom = -24.0
+mouse_filter = 0
+script = ExtResource( 6 )
+object = ExtResource( 10 )
+
+[node name="BuildingButton8" type="TextureRect" parent="Layer/Control/BuildingPanel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 22.0
+margin_top = -20.0
+margin_right = 62.0
+margin_bottom = 20.0
+mouse_filter = 0
+script = ExtResource( 6 )
+object = ExtResource( 14 )
+
+[node name="BuildingButton9" type="TextureRect" parent="Layer/Control/BuildingPanel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 22.0
+margin_top = 24.0
+margin_right = 62.0
+margin_bottom = 64.0
+mouse_filter = 0
+script = ExtResource( 6 )
+object = ExtResource( 15 )
+
+[node name="Button" type="Button" parent="Layer/Control"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.0
+margin_top = -55.0
+margin_right = 24.0
+margin_bottom = -16.0
+custom_colors/font_color_hover = Color( 0, 0, 0, 0.580392 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+shortcut_in_tooltip = false
+text = "+"
+flat = true
+script = ExtResource( 18 )
+
+[node name="GaragePanel" type="Control" parent="Layer/Control"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = -20.0
+margin_right = -10.0
+margin_bottom = 20.0
+
+[node name="Item1" type="TextureRect" parent="Layer/Control/GaragePanel"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 20 )
+sprite = ExtResource( 11 )
+
+[node name="Item2" type="TextureRect" parent="Layer/Control/GaragePanel"]
+margin_top = 50.0
+margin_right = 40.0
+margin_bottom = 90.0
+script = ExtResource( 20 )
+sprite = ExtResource( 13 )
+type = 1
+
+[node name="Item4" type="TextureRect" parent="Layer/Control/GaragePanel"]
+margin_top = -100.0
+margin_right = 40.0
+margin_bottom = -60.0
+script = ExtResource( 20 )
+sprite = ExtResource( 19 )
+type = 2
+
+[node name="Item3" type="TextureRect" parent="Layer/Control/GaragePanel"]
+margin_top = -50.0
+margin_right = 40.0
+margin_bottom = -10.0
+script = ExtResource( 20 )
+sprite = ExtResource( 21 )
+type = 3
+
+[node name="Energy" type="Panel" parent="Layer/Control"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 82.0
+margin_bottom = 22.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="Layer/Control/Energy"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 45.0
+margin_bottom = 16.0
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="Layer/Control/Energy"]
+margin_left = 70.0
+margin_top = 2.0
+margin_right = 76.0
+margin_bottom = 15.0
+rect_clip_content = true
+texture = ExtResource( 24 )
+expand = true
+
+[node name="Wood" type="Panel" parent="Layer/Control"]
+margin_left = 182.0
+margin_top = 2.0
+margin_right = 262.0
+margin_bottom = 22.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="Layer/Control/Wood"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 45.0
+margin_bottom = 16.0
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="Layer/Control/Wood"]
+margin_left = 60.0
+margin_top = 1.0
+margin_right = 76.0
+margin_bottom = 17.0
+rect_clip_content = true
+texture = ExtResource( 26 )
+expand = true
+
+[node name="Ox" type="Panel" parent="Layer/Control"]
+margin_left = 92.0
+margin_top = 2.0
+margin_right = 172.0
+margin_bottom = 22.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="Layer/Control/Ox"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 45.0
+margin_bottom = 16.0
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="Layer/Control/Ox"]
+margin_left = 70.0
+margin_top = 2.0
+margin_right = 76.0
+margin_bottom = 15.0
+rect_clip_content = true
+texture = ExtResource( 25 )
+expand = true
+
+[node name="Crystals" type="Panel" parent="Layer/Control"]
+margin_left = 272.0
+margin_top = 2.0
+margin_right = 352.0
+margin_bottom = 22.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="Layer/Control/Crystals"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 45.0
+margin_bottom = 16.0
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="Layer/Control/Crystals"]
+margin_left = 50.0
+margin_top = 4.0
+margin_right = 76.0
+margin_bottom = 17.0
+rect_clip_content = true
+texture = ExtResource( 27 )
+expand = true
+
+[node name="Timer" type="Label" parent="Layer/Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 10.0
+margin_right = 20.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 4 )
+text = "1:12"
+
+[node name="Wave" type="Label" parent="Layer/Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -51.0
+margin_top = 40.0
+margin_right = 51.0
+margin_bottom = 73.0
+custom_fonts/font = SubResource( 4 )
+text = "Wave 1"
+
+[node name="Workers" type="Label" parent="Layer/Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -43.0
+margin_right = 112.0
+margin_bottom = -10.0
+custom_fonts/font = SubResource( 5 )
+text = "Wave 1"
+
+[node name="ToolTip" type="Panel" parent="Layer/Control"]
+margin_right = 150.0
+margin_bottom = 60.0
+custom_styles/panel = SubResource( 6 )
+
+[node name="Name" type="Label" parent="Layer/Control/ToolTip"]
+margin_left = 10.0
+margin_top = 2.0
+margin_right = 50.0
+margin_bottom = 19.0
+text = "Name"
+
+[node name="Wood" type="Label" parent="Layer/Control/ToolTip"]
+margin_left = 10.0
+margin_top = 20.0
+margin_right = 50.0
+margin_bottom = 37.0
+text = "Name"
+
+[node name="Stone" type="Label" parent="Layer/Control/ToolTip"]
+margin_left = 10.0
+margin_top = 40.0
+margin_right = 50.0
+margin_bottom = 57.0
+text = "Name"
+
+[node name="Workers" type="Node2D" parent="."]
