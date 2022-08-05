@@ -1,4 +1,4 @@
-# A-Rts-Game
+# Get Mars
 A Game I made in godot to learn about AI and animations 
 Some ScreenShots:
 
